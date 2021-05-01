@@ -79,54 +79,22 @@
 									</div>
 								</div>
 							</div>
+							{% for category in categories %}
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Kids</a></h4>
+									<h4 class="panel-title"><a href="#">{{category.name}}</a></h4>
 								</div>
 							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Fashion</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Households</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Interiors</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Clothing</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Bags</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Shoes</a></h4>
-								</div>
-							</div>
+							{% endfor %}
 						</div><!--/category-products-->
 					
 						<div class="brands_products"><!--brands_products-->
 							<h2>Brands</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
-									<li><a href=""> <span class="pull-right">(50)</span>Acne</a></li>
-									<li><a href=""> <span class="pull-right">(56)</span>Grüne Erde</a></li>
-									<li><a href=""> <span class="pull-right">(27)</span>Albiro</a></li>
-									<li><a href=""> <span class="pull-right">(32)</span>Ronhill</a></li>
-									<li><a href=""> <span class="pull-right">(5)</span>Oddmolly</a></li>
-									<li><a href=""> <span class="pull-right">(9)</span>Boudestijn</a></li>
-									<li><a href=""> <span class="pull-right">(4)</span>Rösch creative culture</a></li>
+									{% for brand in brands %}
+									<li><a href=""> <span class="pull-right">(50)</span>{{brand.name}}</a></li>
+									{% endfor %}
 								</ul>
 							</div>
 						</div><!--/brands_products-->
@@ -140,7 +108,9 @@
 						</div><!--/price-range-->
 						
 						<div class="shipping text-center"><!--shipping-->
-							<img src="{% static 'images/home/shipping.jpg' %}" alt="" />
+							{% for ad in ads1 %}
+							<img src="{{ad.image.url}}" alt="" />
+							{% endfor %}
 						</div><!--/shipping-->
 						
 					</div>
@@ -150,30 +120,15 @@
 					<div class="product-details"><!--product-details-->
 						<div class="col-sm-5">
 							<div class="view-product">
-								<img src="{% static 'images/product-details/1.jpg' %}" alt="" />
+								{% for detail in detail_item %}
+								<img src="{{detail.image.url}}" alt="" />
 								<h3>ZOOM</h3>
+								{% endfor %}
 							</div>
 							<div id="similar-product" class="carousel slide" data-ride="carousel">
 								
 								  <!-- Wrapper for slides -->
-								    <div class="carousel-inner">
-										<div class="item active">
-										  <a href=""><img src="{% static 'images/product-details/similar1.jpg' %}" alt=""></a>
-										  <a href=""><img src="{% static 'images/product-details/similar2.jpg' %}" alt=""></a>
-										  <a href=""><img src="{% static 'images/product-details/similar3.jpg' %}" alt=""></a>
-										</div>
-										<div class="item">
-										  <a href=""><img src="{% static 'images/product-details/similar1.jpg' %}" alt=""></a>
-										  <a href=""><img src="{% static 'images/product-details/similar2.jpg' %}" alt=""></a>
-										  <a href=""><img src="{% static 'images/product-details/similar3.jpg' %}" alt=""></a>
-										</div>
-										<div class="item">
-										  <a href=""><img src="{% static 'images/product-details/similar1.jpg' %}" alt=""></a>
-										  <a href=""><img src="{% static 'images/product-details/similar2.jpg' %}" alt=""></a>
-										  <a href=""><img src="{% static 'images/product-details/similar3.jpg' %}" alt=""></a>
-										</div>
-										
-									</div>
+
 
 								  <!-- Controls -->
 								  <a class="left item-control" href="#similar-product" data-slide="prev">
@@ -187,23 +142,24 @@
 						</div>
 						<div class="col-sm-7">
 							<div class="product-information"><!--/product-information-->
+								{% for detail in detail_item %}
 								<img src="{% static 'images/product-details/new.jpg' %}" class="newarrival" alt="" />
-								<h2>Anne Klein Sleeveless Colorblock Scuba</h2>
-								<p>Web ID: 1089772</p>
+								<h1>{{detail.title}}</h1>
 								<img src="{% static 'images/product-details/rating.png' %}" alt="" />
 								<span>
-									<span>US $59</span>
+									<span> Rs. {{detail.price}}</span>
 									<label>Quantity:</label>
-									<input type="text" value="3" />
+									<input type="text" value="1" />
 									<button type="button" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
 										Add to cart
 									</button>
 								</span>
-								<p><b>Availability:</b> In Stock</p>
-								<p><b>Condition:</b> New</p>
-								<p><b>Brand:</b> E-SHOPPER</p>
+								<p><b>Availability:</b> {{detail.status}}</p>
+								<p><b>Condition:</b> {{detail.label}}</p>
+								<p><b>Brand:</b> {{detail.brand}}</p>
 								<a href=""><img src="{% static 'images/product-details/share.png' %}" class="share img-responsive"  alt="" /></a>
+								{% endfor %}
 							</div><!--/product-information-->
 						</div>
 					</div><!--/product-details-->
@@ -211,9 +167,7 @@
 					<div class="category-tab shop-details-tab"><!--category-tab-->
 						<div class="col-sm-12">
 							<ul class="nav nav-tabs">
-								<li><a href="#details" data-toggle="tab">Details</a></li>
-								<li><a href="#companyprofile" data-toggle="tab">Company Profile</a></li>
-								<li><a href="#tag" data-toggle="tab">Tag</a></li>
+
 								<li class="active"><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
 							</ul>
 						</div>
@@ -268,7 +222,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 							<div class="tab-pane fade" id="companyprofile" >
 								<div class="col-sm-3">
 									<div class="product-image-wrapper">
@@ -319,7 +273,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 							<div class="tab-pane fade" id="tag" >
 								<div class="col-sm-3">
 									<div class="product-image-wrapper">
@@ -403,81 +357,37 @@
 						
 						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
 							<div class="carousel-inner">
-								<div class="item active">	
+								<div class="item active">
+									{% for item in related_item %}
 									<div class="col-sm-4">
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="{% static 'images/home/recommend1.jpg' %}" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
+													<img src="{{item.image.url}}" alt="" />
+													<h2>Rs.{{item.price}}</h2>
+													<p>{{item.title}}</p>
 													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="{% static 'images/home/recommend2.jpg' %}" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="{% static 'images/home/recommend3.jpg' %}" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-												</div>
-											</div>
-										</div>
-									</div>
+									{% endfor %}
 								</div>
-								<div class="item">	
+								<div class="item">
+									{% for item in related_item %}
 									<div class="col-sm-4">
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="{% static 'images/home/recommend1.jpg' %}" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
+													<img src="{{item.image.url}}" alt="" />
+													<h2>RS.{{item.price}}</h2>
+													<p>{{item.title}}</p>
 													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="{% static 'images/home/recommend2.jpg' %}" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="{% static 'images/home/recommend3.jpg' %}" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-												</div>
-											</div>
-										</div>
-									</div>
+									{% endfor %}
 								</div>
 							</div>
 							 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">

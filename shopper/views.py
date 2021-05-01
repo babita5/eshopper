@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from .views import *
 from django.views.generic.base import View
 from django.contrib.auth.models import User
-from django.contrib import messages
+from django.contrib import messages, auth
 from .models import *
+
+
 # Create your views here.
 class BaseView(View):
     views={}
@@ -12,6 +14,13 @@ class HomeView(BaseView):
     def get(self,request):
         self.views['sliders']=Slider.objects.all()
         self.views['categories']=Category.objects.all()
+        self.views['subcategories']=SubCategory.objects.all()
+        self.views['ads1']=Ad.objects.filter(rank=1)
+        self.views['items']=Item.objects.all()
+        self.views['hot_items']=Item.objects.filter(label='hot')
+        self.views['new_items']=Item.objects.filter(label='new')
+        self.views['sale_items']=Item.objects.filter(label='sale')
+        self.views['brands']=Brand.objects.all()
 
         return render(request,'index.html',self.views)
 
@@ -30,15 +39,24 @@ def contact(request):
         subject= request.POST['subject']
         message=request.POST['message']
 
-    data=Contact.objects.create(
-        name=name,
-        email=email,
-        subject=subject,
-        message=message
-    )
-    data.save()
-    # messages.success(request, 'Message is submitted.')
+        data=Contact.objects.create(
+            name=name,
+            email=email,
+            subject=subject,
+            message=message
+        )
+        data.save()
+        messages.success(request, 'Message is Submitted.')
+        return redirect('shopper:contact')
     return render(request, 'contact-us.html')
+
+class ProductDetailView(BaseView):
+    def get(self,request,slug):
+        category=Item.objects.get(slug=slug).category
+        self.views['detail_item']=Item.objects.filter(slug=slug)
+        self.views['related_item']=Item.objects.filter(category=category)
+
+        return render(request,'product-details.html',self.views)
 
 def signup(request):
     if request.method=='POST':
@@ -72,4 +90,26 @@ def signup(request):
             return redirect('shopper:signup')
 
     return render(request, 'signup.html')
+
+def signin(request):
+    if request.method=='POST':
+        username=request.POST['username']
+        password=request.POST['password']
+
+        user=auth.authenticate(username=username,password=password)
+        if user is not None:
+            auth.login(request,user)
+            return redirect('/')
+
+        else:
+            messages.error(request,'Username and Password is incorrect')
+            return redirect('shopper:signin')
+
+    return render(request, 'signin.html')
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
+
+
 

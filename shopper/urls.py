@@ -22,7 +22,10 @@ urlpatterns = [
     path('',HomeView.as_view(),name='home'),
     path('shop',ShopView.as_view(),name='shop'),
     path('product',ProductView.as_view(),name='product-details'),
+    path('product/<slug>',ProductDetailView.as_view(),name='product'),
     path('contact',contact,name='contact'),
     path('signup', signup,name='signup'),
+    path('signin',signin, name='signin'),
+    path('logout',logout, name='logout'),
 
 ]

@@ -89,8 +89,9 @@
 							<ul class="nav navbar-nav">
 
 								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="cart.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								{% if user.is_authenticated %}
-									<li><a href="#"><i class="fa fa-lock"></i> {{user.username}}</a></li>
+									<li><a href="#"><i class="fa fa-user"></i> {{user.username}}</a></li>
 									<li><a href="logout"><i class="fa fa-sign-out"></i> Logout </a></li>
 								{% else %}
 									<li><a href="signin"><i class="fa fa-lock"></i> Login </a></li>
@@ -127,21 +128,17 @@
 										<li><a href="login.html">Login</a></li>
                                     </ul>
                                 </li>
-								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">Blog List</a></li>
-										<li><a href="blog-single.html">Blog Single</a></li>
-                                    </ul>
-                                </li>
-								<li><a href="404.html">404</a></li>
 								<li><a href="contact">Contact</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-sm-3">
+						<form method="GET" action="{% url 'shopper:search' %}">
+						{% csrf_token %}
 						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
+							<input name="query" type="text" placeholder="Search"/>
 						</div>
+						</form>
 					</div>
 				</div>
 			</div>

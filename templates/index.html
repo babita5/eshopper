@@ -124,7 +124,7 @@
 							{% for category in categories %}
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">{{category.name}}</a></h4>
+									<h4 class="panel-title"><a href="{{category.get_category_url}}">{{category.name}}</a></h4>
 								</div>
 							</div>
 							{% endfor %}
@@ -136,7 +136,7 @@
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
 									{% for brand in brands %}
-									<li><a href="#"> <span class="pull-right"></span>{{brand.name}}</a></li>
+									<li><a href="{{brand.get_brand_url}}"> <span class="pull-right"></span>{{brand.name}}</a></li>
 									{% endfor %}
 
 								</ul>
@@ -171,7 +171,11 @@
 											<a href="{{hot.get_url}}">
 											<img src="{{hot.image.url}}" alt="" />
 											</a>
-											<h2>${{hot.price}}</h2>
+											{% if hot.discounted_price > 0 %}
+											<h2>Rs.{{hot.discounted_price}}</h2>
+											{% else %}
+											<h2>Rs.{{hot.price}}</h2>
+											{% endif %}
 											<a href="{{hot.get_url}}">
 											<p>{{hot.title}}</p>
 											</a>

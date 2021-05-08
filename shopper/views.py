@@ -58,6 +58,31 @@ class ProductDetailView(BaseView):
 
         return render(request,'product-details.html',self.views)
 
+class CategoryView(BaseView):
+    def get(self,request,slug):
+        cat=Category.objects.get(slug=slug).id
+        self.views['category_item']=Item.objects.filter(category=cat)
+
+        return render(request,'category.html',self.views)
+
+class BrandView(BaseView):
+    def get(self,request,rank):
+        brand=Brand.objects.get(rank=rank).id
+        self.views['brand_item']=Item.objects.filter(brand=brand)
+
+        return render(request,'brand.html',self.views)
+
+class SearchView(BaseView):
+    def get(self,request):
+        query=request.GET.get('query', None)
+        if not query:
+            return redirect('/')
+        self.views['search_query']=Item.objects.filter(
+            title__icontains=query
+        )
+        self.views['searched_for']=query
+        return render(request,'search.html',self.views)
+
 def signup(request):
     if request.method=='POST':
         first_name=request.POST['first_name']

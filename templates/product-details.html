@@ -147,7 +147,11 @@
 								<h1>{{detail.title}}</h1>
 								<img src="{% static 'images/product-details/rating.png' %}" alt="" />
 								<span>
+									{% if detail.discounted_price > 0 %}
+									<span> Rs. {{detail.discounted_price}}</span>
+									{% else %}
 									<span> Rs. {{detail.price}}</span>
+									{% endif %}
 									<label>Quantity:</label>
 									<input type="text" value="1" />
 									<button type="button" class="btn btn-fefault cart">
@@ -364,7 +368,11 @@
 											<div class="single-products">
 												<div class="productinfo text-center">
 													<img src="{{item.image.url}}" alt="" />
-													<h2>Rs.{{item.price}}</h2>
+													{% if item.discounted_price > 0 %}
+													<h2>RS.{{item.discounted_price}}</h2>
+													{% else %}
+													<h2>RS.{{item.price}}</h2>
+													{% endif %}
 													<p>{{item.title}}</p>
 													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 												</div>
@@ -380,7 +388,11 @@
 											<div class="single-products">
 												<div class="productinfo text-center">
 													<img src="{{item.image.url}}" alt="" />
+													{% if item.discounted_price > 0 %}
+													<h2>RS.{{item.discounted_price}}</h2>
+													{% else %}
 													<h2>RS.{{item.price}}</h2>
+													{% endif %}
 													<p>{{item.title}}</p>
 													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 												</div>

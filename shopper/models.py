@@ -31,6 +31,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def get_category_url(self):
+        return reverse('shopper:category',kwargs= {'slug':self.slug})
+
 class SubCategory(models.Model):
     name=models.CharField(max_length=200)
     slug=models.CharField(max_length=200, unique=True)
@@ -57,6 +60,8 @@ class Brand(models.Model):
     def __str__(self):
         return self.name
 
+    def get_brand_url(self):
+        return reverse('shopper:brand',kwargs={'rank':self.rank})
 
 class Item(models.Model):
     title = models.CharField(max_length=300)
